@@ -66,6 +66,10 @@ button{
   outline: none;
 }
 
+input {
+  outline: none;
+}
+
 h1, h2, h3, h4, h5, h6 {
   color: #2B2D42;
   font-weight: 700;
