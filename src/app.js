@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const port = process.env.PORT || 2000;
 const ejs = require("ejs");
+const providers = require('./providers')
 
 
 // Set the view engine to ejs
@@ -10,12 +11,27 @@ app.set('view engine', 'html');
 app.engine('html', ejs.renderFile);
 
 
-app.get('/product', (req, res) => {
-    res.render('pages/product')
+app.get('/product', async(req, res) => {
+    const id = req.query.id;
+    const product =  await providers.getProductById(id);
+
+    if(product != null) {
+        res.render('pages/product', {
+            product
+        })
+    } else {
+        res.status(404).send('Not found');
+    }
+
+    
 })
 
-app.get('/', (req, res) => {
-    res.render('pages/index');
+app.get('/', async(req, res) => {
+    var products = await providers.getProducts();
+  
+    res.render('pages/index', {
+        products
+    });
 })
 
 
