@@ -27,10 +27,11 @@ app.get('/product', async(req, res) => {
 })
 
 app.get('/', async(req, res) => {
-    var products = await providers.getProducts();
+    var newProducts = await providers.getNewProducts();
+    var moreVisitedProduct = await providers.getMoreVisitedProducts();
   
     res.render('pages/index', {
-        products
+        newProducts, moreVisitedProduct
     });
 })
 

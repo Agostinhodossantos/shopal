@@ -881,6 +881,10 @@ textarea.input {
 
 .product .product-img>img {
   width: 100%;
+  
+  object-fit: cover; /* Do not scale the image */
+  object-position: center; /* Center the image within the element */
+  height: 200px;
 }
 
 .product .product-img .product-label {
@@ -924,6 +928,7 @@ textarea.input {
 .product .product-body .product-name {
   text-transform: uppercase;
   font-size: 14px;
+  white-space: pre-line;
 }
 
 .product .product-body .product-name>a {

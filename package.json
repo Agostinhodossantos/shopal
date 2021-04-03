@@ -1,0 +1,31 @@
+{
+  "dependencies": {
+    "axios": "^0.21.1",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1"
+  },
+  "name": "electro-master",
+  "description": "Thanks for downloading this theme!",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "devStart": "nodemon src/app.js",
+    "start": "nodemon src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Agostinhodossantos/shopal.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Agostinhodossantos/shopal/issues"
+  },
+  "homepage": "https://github.com/Agostinhodossantos/shopal#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
