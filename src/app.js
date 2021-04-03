@@ -15,6 +15,7 @@ app.get('/product', async(req, res) => {
     const id = req.query.id;
     const product =  await providers.getProductById(id);
 
+
     if(product != null) {
         res.render('pages/product', {
             product

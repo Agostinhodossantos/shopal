@@ -65,8 +65,10 @@ async function getMoreVisitedProducts() {
 }
 
 async function getProductByCategory(category) {
-    // todo get product by category 
     var productByCategory = await getProductByCategory();
+    var productByCategoryList = [];
+    
+
     return productByCategory;
 }
 
