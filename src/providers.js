@@ -1,7 +1,7 @@
 const axios = require('axios').default;
 const utils = require("./utils")
 require('dotenv').config();
-const BASE_URL = process.env.BASE_URL;
+const BASE_URL = process.env.BASE_URL_LOCAL;
 
 async function getProducts() {
     var products = [];

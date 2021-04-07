@@ -11,23 +11,6 @@ app.set('view engine', 'html');
 app.engine('html', ejs.renderFile);
 
 
-app.get('/product', async(req, res) => {
-    const id = req.query.id;
-    const product =  await providers.getProductById(id);
-    var category = product["data"].product["category"];
-    var relatedProduct = await providers.getProductByCategory(category, 8);
-
-    if(product != null) {
-        res.render('pages/product', {
-            product, relatedProduct
-        })
-    } else {
-        res.status(404).send('Not found');
-    }
-
-    
-})
-
 app.get('/', async(req, res) => {
     var newProducts = await providers.getNewProducts();
     var moreVisitedProduct = await providers.getMoreVisitedProducts();
@@ -42,6 +25,29 @@ app.get('/', async(req, res) => {
         newProducts, moreVisitedProduct, categoryList, carsProduct, homeProduct, techProduct
     });
 })
+
+app.get('/product', async(req, res) => {
+    const id = req.query.id;
+    const product =  await providers.getProductById(id);
+    var category = product["data"].product["category"];
+    var relatedProduct = await providers.getProductByCategory(category, 8);
+
+    if(product != null) {
+        res.render('pages/product', {
+            product, relatedProduct
+        })
+    } else {
+        res.status(404).send('Not found');
+    }
+    
+})
+
+app.get("/productby/:id", async(req, res) => {
+    var category = req.params.id
+    var relatedProduct = await providers.getProductByCategory(category, 8);
+    res.render("pages/productbycategory", {relatedProduct, category})
+})
+
 
 
 

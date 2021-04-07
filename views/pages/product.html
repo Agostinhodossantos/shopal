@@ -181,7 +181,7 @@
 							
 							<div class="col-md-3 col-xs-6">
 								<div class="product">
-									<div class="product-img" onclick="location.href='product?id=<%= product.uid%>'">
+									<div class="product-img" onclick="location.href='/product?id=<%= currentProduct.uid%>'">
 										<img src="  <%= currentProduct.img %> " alt="">
 										<!-- <div class="product-label">
 											<span class="sale"> novo </span>
@@ -196,7 +196,7 @@
 										<div class="product-btns">
 											<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
 											<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-											<button class="quick-view" onclick="location.href='product?id=<%= product.uid%>'"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+											<button class="quick-view" onclick="location.href='/product?id=<%= currentProduct.uid%>'"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
 										</div>
 									</div>
 									

@@ -21,7 +21,7 @@
 						<li class="active"><a href="/">Home</a></li>
 						<%if(typeof categoryList != 'undefined') {%>
 							<%categoryList.forEach(function(category) { %>
-								<li><a href="#"> <%= category%> </a></li>
+								<li><a href="/productby/<%= category%> "> <%= category%> </a></li>
 							<%})%>
 						<%}%>
 						<li><a href="#">Todas categorias</a></li>
@@ -428,7 +428,7 @@
 									<% if(i == 3) {  break }%>
 									<!-- product widget -->
 									<div class="product-widget">
-										<div class="product-img">
+										<div class="product-img"  onclick="location.href='/product?id=<%= techProduct[i].uid%>'" >
 											<img src="<%= techProduct[i].img %>" alt="">
 										</div>
 										<div class="product-body">
