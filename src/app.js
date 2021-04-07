@@ -14,11 +14,12 @@ app.engine('html', ejs.renderFile);
 app.get('/product', async(req, res) => {
     const id = req.query.id;
     const product =  await providers.getProductById(id);
-
+    var category = product["data"].product["category"];
+    var relatedProduct = await providers.getProductByCategory(category, 8);
 
     if(product != null) {
         res.render('pages/product', {
-            product
+            product, relatedProduct
         })
     } else {
         res.status(404).send('Not found');
@@ -30,9 +31,15 @@ app.get('/product', async(req, res) => {
 app.get('/', async(req, res) => {
     var newProducts = await providers.getNewProducts();
     var moreVisitedProduct = await providers.getMoreVisitedProducts();
-  
+    var categoryList = await providers.getCategory(6);
+
+    var carsProduct = await providers.getProductByCategory("Veículos", 6)
+    var homeProduct = await providers.getProductByCategory("Imobiliária", 6)
+    var techProduct = await providers.getProductByCategory("Tecnologia", 6)
+
+    console.log(homeProduct )
     res.render('pages/index', {
-        newProducts, moreVisitedProduct
+        newProducts, moreVisitedProduct, categoryList, carsProduct, homeProduct, techProduct
     });
 })
 

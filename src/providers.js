@@ -1,9 +1,14 @@
 const axios = require('axios').default;
+const utils = require("./utils")
 require('dotenv').config();
 const BASE_URL = process.env.BASE_URL;
 
 async function getProducts() {
     var products = [];
+
+    if(products.length > 6) {
+        return products;
+    }
 
     await axios.get(`${BASE_URL}/products`)
     .then(function (response) {
@@ -43,11 +48,10 @@ async function getNewProducts() {
     var newProductList = [];
 
     for(prod of newProduct) {
-        if(prod["data"].product["title"].length > 35) {
-            prod["data"].product["title"] = prod["data"].product["title"].substring(0, 35)+"..".trim();
-        }else {
-            prod["data"].product["title"] = prod["data"].product["title"]+"\n \n";
-        }
+       
+        prod["data"].product["title"] = await utils.getProductTitle(prod["data"].product["title"] )
+        prod["data"].product["locationCity"] = await utils.getLocation( prod["data"].product["locationCity"] )
+        prod["data"].product["price"] =  prod["data"].product["price"]+" MT"
 
         if(prod["data"].product["img"] != 'undifined' && prod["data"].product["img"] != "" ) {
             newProductList.push(prod["data"].product);
@@ -58,29 +62,67 @@ async function getNewProducts() {
     return newProductList;
 }
 
-async function getMoreVisitedProducts() {
+
+async function getMoreVisitedProducts(limit = 20) {
     // todo get product by visit
     var moreVisitedProducts = await getProducts();
-    return moreVisitedProducts;
+    var moreVisitedProductsList = [];
+    var count = 0;
+
+    for(prod of moreVisitedProducts) {
+        prod["data"].product["title"] = await utils.getProductTitle(prod["data"].product["title"] )
+        prod["data"].product["locationCity"] = await utils.getLocation( prod["data"].product["locationCity"] )
+        prod["data"].product["price"] =  prod["data"].product["price"]+" MT"
+
+        moreVisitedProductsList.push(prod["data"].product)
+        if(limit == count) {
+            break
+        }
+    }
+    return moreVisitedProductsList.reverse();
 }
 
-async function getProductByCategory(category) {
-    var productByCategory = await getProductByCategory();
+async function getProductByCategory(category, limit) {
+    var productByCategory = await getProducts()
     var productByCategoryList = [];
-    
+    var count = 0;
 
-    return productByCategory;
-}
+    for(prod of productByCategory) {
 
-async function getCategory() {
-    var allproducts = await getProducts();
-    var categoryList = [];
+        prod["data"].product["title"] = await utils.getProductTitle(prod["data"].product["title"] )
+        prod["data"].product["locationCity"] = await utils.getLocation( prod["data"].product["locationCity"] )
+        prod["data"].product["price"] =  prod["data"].product["price"]+" MT"
 
-    for(allproducts of product) {
-        categoryList.push(product.category)
+        if(prod["data"].product["category"].includes(category)) {
+            productByCategoryList.push(prod["data"].product);
+            count++
+        }
+
+        if(count == limit) {
+            break;
+        }
     }
 
-    return categoryList;
+    return productByCategoryList;
+}
+
+async function getCategory(limit) {
+    var allproducts = await getProducts();
+    var categoryList = [];
+    var count = 0;
+    for(product of allproducts) {
+        categoryList.push(product["data"].product["category"])
+        count++
+        if(limit != null){
+            if(count == limit) {
+                break;
+            }
+        }
+       
+    }
+    var setCategory = new Set(categoryList);
+
+    return  setCategory;
 }
 
 exports.getProducts = getProducts;
@@ -88,3 +130,4 @@ exports.getProductById = getProductById;
 exports.getNewProducts = getNewProducts;
 exports.getMoreVisitedProducts = getMoreVisitedProducts;
 exports.getProductByCategory = getProductByCategory;
+exports.getCategory =  getCategory;
