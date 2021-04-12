@@ -246,7 +246,7 @@
 														<!-- product -->
 												<div class="product">
 													<div class="product-img">
-														<img src=" <%= product.img %> " alt="">
+														<img src=" <%= product.img %> " alt=""  onclick="location.href='product?id=<%= product.uid%>'" >
 														<div class="product-label">
 															<span class="sale">-30%</span>
 															<span class="new">NEW</span>
@@ -313,7 +313,7 @@
 									<!-- product widget -->
 									<div class="product-widget">
 										<div class="product-img">
-											<img src="<%= carsProduct[i].img %>" alt="">
+											<img src="<%= carsProduct[i].img %>" alt=""  onclick="location.href='product?id=<%= carsProduct[i].uid %>'" >
 										</div>
 										<div class="product-body">
 											<p class="product-category"><%= carsProduct[i].locationCity %></p>
@@ -335,7 +335,7 @@
 									<!-- product widget -->
 									<div class="product-widget">
 										<div class="product-img">
-											<img src="<%= carsProduct[i].img %>" alt="">
+											<img src="<%= carsProduct[i].img %>" alt="" onclick="location.href='product?id=<%= carsProduct[i] %>'">
 										</div>
 										<div class="product-body">
 											<p class="product-category"><%= carsProduct[i].locationCity %></p>
@@ -368,7 +368,7 @@
 									<!-- product widget -->
 									<div class="product-widget">
 										<div class="product-img">
-											<img src="<%= homeProduct[i].img %>" alt="">
+											<img src="<%= homeProduct[i].img %>" alt="" onclick="location.href='product?id=<%= homeProduct[i].uid%>'" >
 										</div>
 										<div class="product-body">
 											<p class="product-category"><%= homeProduct[i].locationCity %></p>
@@ -441,7 +441,7 @@
 									<!-- product widget -->
 									<div class="product-widget">
 										<div class="product-img">
-											<img src="<%= techProduct[i].img %>" alt="">
+											<img src="<%= techProduct[i].img %>" alt="" onclick="location.href='product?id=<%= techProduct[i].uid %>'"  >
 										</div>
 										<div class="product-body">
 											<p class="product-category"><%= techProduct[i].locationCity %></p>

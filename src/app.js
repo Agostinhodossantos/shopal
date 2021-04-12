@@ -47,8 +47,15 @@ app.get('/product', async(req, res) => {
 
 app.get("/productby/:id", async(req, res) => {
     var category = req.params.id
-    var relatedProduct = await providers.getProductByCategory(category, 8);
+    var relatedProduct = await providers.getProductByCategory(category, 0);
     res.render("pages/productbycategory", {relatedProduct, category})
+})
+
+app.get("/search/:id", async(req, res) => {
+    var query = req.params.id
+    var queryProduct = await providers.searchProduct(query);
+    console.log(queryProduct)
+    res.render("pages/product-search",{ queryProduct, query} )
 })
 
 app.post("/newsletter", (req, res) => {

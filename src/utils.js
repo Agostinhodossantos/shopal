@@ -20,8 +20,19 @@ async function getProductTitle(title) {
     return styledTitle
 }
 
+async function queryProductBy(title,category,  subCategory, query) {
+    if(title.includes(query) || category.includes(category) || subCategory.includes(query)) {
+        console.log(title, query)
+        return true
+    }else {
+        return false
+    }
+}
 
 
 
-exports.getLocation = getLocation;
-exports.getProductTitle = getProductTitle;
+module.exports = {
+    queryProductBy,
+    getLocation,
+    getProductTitle
+}

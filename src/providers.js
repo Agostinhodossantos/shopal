@@ -114,7 +114,7 @@ async function getCategory(limit) {
     for(product of allproducts) {
         categoryList.push(product["data"].product["category"])
         count++
-        if(limit != null){
+        if(limit != 0){
             if(count == limit) {
                 break;
             }
@@ -126,10 +126,27 @@ async function getCategory(limit) {
     return  setCategory;
 }
 
-async function subscribeNews(data) {
+async function searchProduct(query) {
+    var allproducts = await getProducts();
+    var queryProducts = []
 
-    console.log("----")
-    console.info(data)
+    for(prod of allproducts) {
+        if(utils.queryProductBy(  prod["data"].product["title"].trim(), 
+        prod["data"].product["category"].trim(), 
+        prod["data"].product["subCategory"].trim() ,query)){
+
+            prod["data"].product["title"] = await utils.getProductTitle(prod["data"].product["title"] )
+            prod["data"].product["locationCity"] = await utils.getLocation( prod["data"].product["locationCity"] )
+            prod["data"].product["price"] =  prod["data"].product["price"]+" MT"
+
+            queryProducts.push(prod["data"].product)
+
+        }
+     }
+
+     return queryProducts
+}
+async function subscribeNews(data) {
     axios.post(`${BASE_URL}/subscribe`, {
         data
     }).then(function (res) {
@@ -141,6 +158,7 @@ async function subscribeNews(data) {
 }
 
 module.exports = {
+    searchProduct,
     getProducts,
     getProductById,
     getNewProducts,

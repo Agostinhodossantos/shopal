@@ -28,6 +28,7 @@
     <!-- /row -->
 </div>
 <script> 
+var inputEmail = document.getElementsByName("email");
 
 document
     .getElementById("newsletter")
@@ -35,6 +36,8 @@ document
         event.preventDefault();
         const email = event.target.email.value;
         var data = {email: email}
+        console.log(inputEmail.value)
+        inputEmail.value = "Cadastrado com sucesso!!!"
         fetch("/newsletter", {
             method: "POST",
             headers: {
