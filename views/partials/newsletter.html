@@ -1,0 +1,56 @@
+<div class="container">
+    <!-- row -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="newsletter">
+                <p>Assine para receber <strong>NOVIDADES</strong></p>
+                <form method="post" action="newsletter" id="newsletter">
+                    <input class="input" type="email" name="email" placeholder="Escreva seu email">
+                    <button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscrever</button>
+                </form>
+                <ul class="newsletter-follow">
+                    <li>
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-instagram"></i></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-pinterest"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /row -->
+</div>
+<script> 
+
+document
+    .getElementById("newsletter")
+    .addEventListener("submit", (event) => {
+        event.preventDefault();
+        const email = event.target.email.value;
+        var data = {email: email}
+        fetch("/newsletter", {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        }).then(function(res) {
+            if(res.ok) {
+                console.log("Sucess")
+            } else {
+
+            }
+        }).catch(function(err) {
+            console.log("Error")
+        })
+   
+    })
+</script>

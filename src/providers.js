@@ -1,12 +1,13 @@
 const axios = require('axios').default;
 const utils = require("./utils")
 require('dotenv').config();
-const BASE_URL = process.env.BASE_URL_LOCAL;
+const BASE_URL = process.env.BASE_URL;
 
 async function getProducts() {
     var products = [];
 
     if(products.length > 6) {
+        console.log("Return list")
         return products;
     }
 
@@ -125,9 +126,26 @@ async function getCategory(limit) {
     return  setCategory;
 }
 
-exports.getProducts = getProducts;
-exports.getProductById = getProductById;
-exports.getNewProducts = getNewProducts;
-exports.getMoreVisitedProducts = getMoreVisitedProducts;
-exports.getProductByCategory = getProductByCategory;
-exports.getCategory =  getCategory;
+async function subscribeNews(data) {
+
+    console.log("----")
+    console.info(data)
+    axios.post(`${BASE_URL}/subscribe`, {
+        data
+    }).then(function (res) {
+        return true
+    }).catch(function (error) {
+        return false
+    })
+
+}
+
+module.exports = {
+    getProducts,
+    getProductById,
+    getNewProducts,
+    getMoreVisitedProducts,
+    getProductByCategory,
+    getCategory,
+    subscribeNews
+}

@@ -21,5 +21,7 @@ async function getProductTitle(title) {
 }
 
 
+
+
 exports.getLocation = getLocation;
 exports.getProductTitle = getProductTitle;

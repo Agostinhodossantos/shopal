@@ -12,6 +12,11 @@
 		e.stopPropagation();
 	});
 
+	// Newsletter
+	$('#newsletter').on('submit', function(e) {
+		e.preventDefault();
+	})
+
 	/////////////////////////////////////////
 
 	// Products Slick

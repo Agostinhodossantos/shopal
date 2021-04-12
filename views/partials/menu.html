@@ -1,0 +1,9 @@
+<ul class="main-nav nav navbar-nav">
+    <li class="active"><a href="/">Home</a></li>
+    <%if(typeof categoryList != 'undefined') {%>
+        <%categoryList.forEach(function(category) { %>
+            <li><a href="/productby/<%= category%> "> <%= category%> </a></li>
+        <%})%>
+    <%}%>
+    <li><a href="#">Todas categorias</a></li>
+</ul>

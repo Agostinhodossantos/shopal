@@ -1,11 +1,13 @@
 const express = require('express')
-const app = express()
+const app = express() 
 const port = process.env.PORT || 2000;
 const ejs = require("ejs");
 const providers = require('./providers')
+const bodyParser = require('body-parser')
 
 
-// Set the view engine to ejs
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 app.use(express.static('public'));
 app.set('view engine', 'html');
 app.engine('html', ejs.renderFile);
@@ -13,6 +15,7 @@ app.engine('html', ejs.renderFile);
 
 app.get('/', async(req, res) => {
     var newProducts = await providers.getNewProducts();
+
     var moreVisitedProduct = await providers.getMoreVisitedProducts();
     var categoryList = await providers.getCategory(6);
 
@@ -20,7 +23,7 @@ app.get('/', async(req, res) => {
     var homeProduct = await providers.getProductByCategory("Imobiliária", 6)
     var techProduct = await providers.getProductByCategory("Tecnologia", 6)
 
-    console.log(homeProduct )
+    console.log(techProduct)
     res.render('pages/index', {
         newProducts, moreVisitedProduct, categoryList, carsProduct, homeProduct, techProduct
     });
@@ -48,8 +51,11 @@ app.get("/productby/:id", async(req, res) => {
     res.render("pages/productbycategory", {relatedProduct, category})
 })
 
-
-
+app.post("/newsletter", (req, res) => {
+    console.log(req.body)
+ 
+    providers.subscribeNews(req.body)
+})
 
 app.listen(port, ()=> {
     console.log(` app listening at http://localhost:${port}`)
